@@ -1,0 +1,8 @@
+packages: *.cabal
+
+constraints:
+    base >= 4.19 && < 5
+
+package *
+    ghc-options: -O2 -threaded -Wall 
+    split-sections: True
