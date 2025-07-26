@@ -17,7 +17,7 @@ main = hakyll do
                 >>= loadAndApplyTemplate "templates/default.html" defaultContext
                 >>= relativizeUrls
 
-    match "content/posts/*" do
+    match "posts/*" do
         route $ setExtension "html"
         compile $
             pandocCompiler
@@ -28,7 +28,7 @@ main = hakyll do
     create ["archive.html"] do
         route idRoute
         compile do
-            posts <- recentFirst =<< loadAll "content/posts/*"
+            posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
                     listField "posts" postCtx (pure posts)
                         <> constField "title" "Archives"
