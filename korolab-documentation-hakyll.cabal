@@ -16,6 +16,7 @@ common common-options
   default-language: GHC2021
   default-extensions: 
     BlockArguments
+    OverloadedStrings
 
 library
   import:
@@ -29,7 +30,7 @@ library
 
   default-language: GHC2021
 
-executable korolab-documentation-hakyll
+executable site
   import:
     common-options
 
