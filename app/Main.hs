@@ -30,9 +30,9 @@ main = hakyll do
         compile do
             posts <- recentFirst =<< loadAll "content/posts/*"
             let archiveCtx =
-                    listField "posts" postCtx (return posts)
-                        `mappend` constField "title" "Archives"
-                        `mappend` defaultContext
+                    listField "posts" postCtx (pure posts)
+                        <> constField "title" "Archives"
+                        <> defaultContext
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -44,8 +44,8 @@ main = hakyll do
         compile do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    listField "posts" postCtx (return posts)
-                        `mappend` defaultContext
+                    listField "posts" postCtx (pure posts)
+                        <> defaultContext
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -54,8 +54,7 @@ main = hakyll do
 
     match "templates/*" $ compile templateBodyCompiler
 
---------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y"
-        `mappend` defaultContext
+        <> defaultContext
